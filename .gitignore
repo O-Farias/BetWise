@@ -1,0 +1,34 @@
+# Ambientes Virtuais (evitar subir o venv)
+venv/
+.env
+
+# Arquivos de cache e compilação do Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Configurações específicas do Codespaces e VSCode
+.vscode/
+*.code-workspace
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de build do React (front-end)
+frontend/node_modules/
+frontend/build/
+
+# Dependências instaladas pelo pip
+backend/__pycache__/
+backend/*.pyc
+
+# Arquivo de lock do pip 
+pip-log.txt
+
+# Outras possíveis pastas temporárias
+*.swp
