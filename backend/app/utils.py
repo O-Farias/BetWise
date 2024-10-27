@@ -2,19 +2,19 @@ import requests
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # Carrega as variáveis do .env
+# Carrega as variáveis do .env
+load_dotenv()
 
-API_KEY = os.getenv("API_FOOTBALL_KEY")
-BASE_URL = "https://v3.football.api-sports.io"
+API_TOKEN = os.getenv("FOOTBALL_DATA_API_TOKEN")  # Token da Football-Data.org
+BASE_URL = "https://api.football-data.org/v4"  # URL da API
 
-# Função para buscar dados dos jogos de uma liga específica e temporada
-def buscar_jogos(liga_id, temporada):
-    url = f"{BASE_URL}/fixtures"
+# Função para buscar partidas de uma competição específica e temporada
+def buscar_partidas(competicao_id, temporada):
+    url = f"{BASE_URL}/competitions/{competicao_id}/matches"
     headers = {
-        "x-apisports-key": API_KEY
+        "X-Auth-Token": API_TOKEN
     }
     params = {
-        "league": liga_id,
         "season": temporada
     }
 
@@ -23,20 +23,19 @@ def buscar_jogos(liga_id, temporada):
     if response.status_code == 200:
         return response.json()
     else:
-        print(f"Erro na requisição: {response.status_code}")
+        print(f"Erro na requisição: {response.status_code} - {response.text}")
         return None
 
-
-# Função para listar todas as ligas disponíveis
+# Função para listar ligas disponíveis
 def listar_ligas():
-    url = f"{BASE_URL}/leagues"
+    url = f"{BASE_URL}/competitions"
     headers = {
-        "x-apisports-key": API_KEY
+        "X-Auth-Token": API_TOKEN
     }
 
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         return response.json()
     else:
-        print(f"Erro ao buscar ligas: {response.status_code}")
+        print(f"Erro ao buscar ligas: {response.status_code} - {response.text}")
         return None
